@@ -1,79 +1,71 @@
-const textarea = document.getElementById("textarea1");
+setInterval(() => {
+    var date = new Date;
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+    var formate = "AM";
+    var day = date.getDate();
+    var dayName = date.getDay();
+    var month = date.toLocaleString('default', { month: "short" });
 
-function fi1(e) {
-    let value = e.value;
-    textarea.style.fontSize = value + "px";
-}
+    let hourRotation = 30 * hours + minutes / 2;
+    let minRotation = 6 * minutes + 6 * seconds;
+    let secRotation = 6 * seconds;
 
-function fi2(e) {
-    if (textarea.style.fontWeight == "bold") {
-        textarea.style.fontWeight = "normal";
-        e.classList.remove("active");
+
+    hour.style.transform = `rotate(${hourRotation})`;
+    min.style.transform = `rotate(${minRotation})`;
+    sec.style.transform = `rotate(${secRotation})`;
+
+    var year = date.getFullYear();
+    if (hours >= 12) {
+        formate = "PM"
+        if (hours != 12) {
+
+            hours = hours - 12;
+        }
     }
-    else {
-        textarea.style.fontWeight = "bold";
-        e.classList.add("active");
+    var name = ['Sunday', 'Monday', 'Tueday', 'Wednesday', 'Thurday', 'Friday', 'Saturday'];
+
+    // console.log(hours + " : " + minutes + " : " + seconds + " ");
+    document.getElementById("clock").innerHTML = hours + " : " + minutes + " : " + seconds + " " + formate;
+    document.getElementById("date").innerHTML = name[dayName] + ' ' + month + ', ' + day + "th " + year;
+}, 1000);
+// element = document.getElementById("clock");
+// setInterval(function () { element.innerHTML += "Hello" }, 1000);
+var date = new Date;
+console.log(date);
+console.log(date.toLocaleString('default', { month: "short" }));
+setInterval(() => {
+    var date = new Date;
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+
+    let hourRotation = 30 * hours + minutes / 2;
+    let minRotation = 6 * minutes;
+    let secRotation = 6 * seconds;
+
+    document.getElementById("hour").style.transform = `rotate(${hourRotation}deg)`;
+    document.getElementById("min").style.transform = `rotate(${minRotation}deg)`;
+    document.getElementById("sec").style.transform = `rotate(${secRotation}deg)`;
+}, 1000);
+
+let switchClock = (x) => {
+    let analog = document.getElementById("analog");
+    let digital = document.getElementById("digital");
+    if (x === "digital") {
+        digital.style.display = "block";
+        analog.style.display = "none";
+        document.getElementById("analogBtn").style.borderBottom = "none";
+        document.getElementById("digitalBtn").style.borderBottom = "1px solid plum";
+        
+
+    } else {
+        digital.style.display = "none";
+        analog.style.display = "block";
+        document.getElementById("analogBtn").style.borderBottom = "1px solid plum";
+        document.getElementById("digitalBtn").style.borderBottom = "none";
+        
     }
 }
-
-function fi3(e) {
-    if (textarea.style.fontStyle == "italic") {
-        textarea.style.fontStyle = "normal";
-        e.classList.remove("active");
-    }
-    else {
-        textarea.style.fontStyle = "italic";
-        e.classList.add("active");
-    }
-}
-
-function fi4(e) {
-    if (textarea.style.textDecoration == "underline") {
-        textarea.style.textDecoration = "none";
-        e.classList.remove("active");
-    }
-    else {
-        textarea.style.textDecoration = "underline";
-        e.classList.add("active");
-    }
-}
-
-function fi5(e) {
-    textarea.style.textAlign = "left";
-}
-
-function fi6(e) {
-    textarea.style.textAlign = "center";
-}
-
-function fi7(e) {
-    textarea.style.textAlign = "right";
-}
-
-function fi8(e) {
-    if (textarea.style.textTransform == "uppercase") {
-        textarea.style.textTransform = "none";
-        e.classList.remove("active");
-    }
-    else {
-        textarea.style.textTransform = "uppercase";
-        e.classList.add("active");
-    }
-}
-
-function fi9() {
-    textarea.style.fontWeight = "normal";
-    textarea.style.textAlign = "left";
-    textarea.style.fontStyle = "normal";
-    textarea.style.textTransform = "capitalize";
-    textarea.value = "";
-}
-
-function fi10(e) {
-    let value = e.value;
-    textarea.style.color = value;
-}
-
-window.addEventListener('load', () => {
-    textarea.value = "";
-});
